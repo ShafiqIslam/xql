@@ -1,0 +1,17 @@
+services:
+  xql:
+    container_name: xql
+    image: xql
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    build:
+      dockerfile: docker/Dockerfile
+      context: ../
+    working_dir: /opt/app
+    volumes:
+      - ../:/opt/app
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=$DISPLAY
+    command: bash -c "tail -f /dev/null"
